@@ -1,0 +1,35 @@
+# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
+    modLoader="javafml"
+    # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
+    # Forge for 1.16.3 is version 34
+    loaderVersion="[35,)"
+    license="GNU GPLv3"
+    # A URL to refer people to when problems occur with this mod
+    issueTrackerURL="https://github.com/ghana7/Trinketeering/issues"
+    # If the mods defined in this file should show as seperate resource packs
+    showAsResourcePack=false
+
+    [[mods]]
+      modId="trinketeering"
+      version="1.0"
+      displayName="Trinketeering"
+      updateJSONURL="https://minecraftforge.net/versions.json"
+      displayURL="https://github.com/ghana7/Trinketeering"
+      logoFile="largelogo.png"
+      credits=""
+      authors="ghana7"
+      description="Lets you make different types of trinkets!"
+
+      [[dependencies.trinketeering]]
+        modId="forge"
+        mandatory=true
+        versionRange="[35,)"
+        ordering="NONE"
+        side="BOTH"
+
+      [[dependencies.trinketeering]]
+        modId="minecraft"
+        mandatory=true
+        versionRange="[1.16.4]"
+        ordering="NONE"
+        side="BOTH"
