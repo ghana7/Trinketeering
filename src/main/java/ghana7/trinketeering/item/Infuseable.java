@@ -23,6 +23,11 @@ public abstract class Infuseable extends Item {
             stack.getOrCreateTag().put("InfusionInventory", ((ItemStackHandler)itemHandler).serializeNBT());
         }
     }
+    public static boolean canInfuseWith(Item item)
+    {
+        return item == Items.SNOWBALL || item == Items.BLAZE_POWDER;
+    }
+
     private ItemStackHandler createInfusionHandler() {
         return new ItemStackHandler(4) {
             @Override
@@ -32,7 +37,7 @@ public abstract class Infuseable extends Item {
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                return stack.getItem() == Items.SNOWBALL || stack.getItem() == Items.BLAZE_POWDER;
+                return canInfuseWith(stack.getItem());
             }
 
             @Override

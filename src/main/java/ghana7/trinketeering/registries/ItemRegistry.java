@@ -1,5 +1,6 @@
 package ghana7.trinketeering.registries;
 
+import ghana7.trinketeering.ModItemGroup;
 import ghana7.trinketeering.TrinketeeringMod;
 import ghana7.trinketeering.item.bead.ClayBead;
 import ghana7.trinketeering.item.bead.GlassBead;
@@ -7,7 +8,9 @@ import ghana7.trinketeering.item.bead.IronBead;
 import ghana7.trinketeering.item.gem.CutDiamond;
 import ghana7.trinketeering.item.gem.CutEmerald;
 import ghana7.trinketeering.item.gem.CutLapis;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -39,5 +42,12 @@ public class ItemRegistry {
 
     public static final RegistryObject<Item> CUT_LAPIS = ITEMS.register("cut_lapis", () ->
             new CutLapis()
+    );
+
+
+    //blockitems
+    public static final RegistryObject<Item> INFUSION_TABLE_BE = ITEMS.register("infusion_table", () ->
+            new BlockItem(BlockRegistry.INFUSION_TABLE.get(),
+                          new Item.Properties().group(ModItemGroup.TRINKETS))
     );
 }
