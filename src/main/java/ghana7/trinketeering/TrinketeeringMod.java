@@ -1,5 +1,9 @@
 package ghana7.trinketeering;
 
+import ghana7.trinketeering.registries.BlockRegistry;
+import ghana7.trinketeering.registries.ContainerRegistry;
+import ghana7.trinketeering.registries.ItemRegistry;
+import ghana7.trinketeering.registries.TileEntityRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -22,17 +26,12 @@ public class TrinketeeringMod {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "trinketeering";
 
-    private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    private static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, MODID);
-    private static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MODID);
-
     public TrinketeeringMod() {
 
-        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        TILE_ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        BlockRegistry.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        TileEntityRegistry.TILE_ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ContainerRegistry.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // Register the doClientStuff method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
