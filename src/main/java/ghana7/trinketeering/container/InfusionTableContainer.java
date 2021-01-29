@@ -7,31 +7,73 @@ import ghana7.trinketeering.registries.ContainerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+
+import javax.annotation.Nonnull;
 
 public class InfusionTableContainer extends Container {
     private PlayerEntity playerEntity;
     private IItemHandler playerInventory;
-    private CraftingInventory infusionSlots = new CraftingInventory(this, 5, 1);
+    private IItemHandler infusionSlots = createHandler();
+    private ItemStackHandler createHandler() {
+        return new ItemStackHandler(5) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                //markDirty();
+                super.onContentsChanged(slot);
+            }
+
+            @Override
+            public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+                return InfusionTableContainer.isItemValid(slot, stack);
+            }
+
+            @Override
+            public int getSlotLimit(int slot)
+            {
+                return 1;
+            }
+
+            @Nonnull
+            @Override
+            public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+                return super.insertItem(slot, stack, simulate);
+            }
+
+            @Nonnull
+            @Override
+            public ItemStack extractItem(int slot, int amount, boolean simulate) {
+                return super.extractItem(slot, amount, simulate);
+            }
+        };
+    }
     private final IWorldPosCallable worldPosCallable;
 
+    public IItemHandler getInfusionSlots() {
+        return infusionSlots;
+    }
     public InfusionTableContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
         super(ContainerRegistry.INFUSION_TABLE_CONTAINER.get(), windowId);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
         this.worldPosCallable = IWorldPosCallable.of(world, pos);
-        this.addSlot(new Slot(infusionSlots, 0, 35, 35));
-        for(int i = 1; i < infusionSlots.getWidth(); i++) {
-            this.addSlot(new Slot(infusionSlots, i, 53 + 18 * i, 35));
+
+        InfusionTableSlot slot = (InfusionTableSlot) this.addSlot(new InfusionTableSlot(infusionSlots, 0, 35, 35, this));
+        NonNullList<Slot> childSlots = NonNullList.create();
+        for(int i = 1; i < 5; i++) {
+            childSlots.add(this.addSlot(new InfusionTableChildSlot(infusionSlots, i, 53 + 18 * i, 35)));
         }
         layoutPlayerInventorySlots(8, 84);
     }
@@ -41,7 +83,7 @@ public class InfusionTableContainer extends Container {
         return isWithinUsableDistance(this.worldPosCallable, playerEntity, BlockRegistry.INFUSION_TABLE.get());
     }
 
-    private boolean isItemValid(int index, ItemStack stack) {
+    private static boolean isItemValid(int index, ItemStack stack) {
         if(index == 0) {
             return stack.getItem() instanceof Infuseable;
         } else {
@@ -49,6 +91,15 @@ public class InfusionTableContainer extends Container {
         }
 
     }
+
+
+    @Override
+    public void putStackInSlot(int slotID, ItemStack stack) {
+        if(isItemValid(slotID, stack)) {
+            super.putStackInSlot(slotID, stack);
+        }
+    }
+
     @Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
         //IItemHandler handler = tileEntity.getGUICapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
@@ -66,17 +117,20 @@ public class InfusionTableContainer extends Container {
                 }
                 slot.onSlotChange(stack, itemstack);
             } else {
-                if(isItemValid(0, stack)) {
-                    if(!this.mergeItemStack(stack, 0, numSlots, false)) {
-                        return ItemStack.EMPTY;
-                    } else if(index < 27 + numSlots) {
-                        if(!this.mergeItemStack(stack, 27 + numSlots, 36 + numSlots, false)) {
+                for(int i = 0; i < numSlots; i++) {
+                    if(isItemValid(i, stack)) {
+                        if(!this.mergeItemStack(stack, i, numSlots, false)) {
+                            return ItemStack.EMPTY;
+                        } else if(index < 27 + numSlots) {
+                            if(!this.mergeItemStack(stack, 27 + numSlots, 36 + numSlots, false)) {
+                                return ItemStack.EMPTY;
+                            }
+                        } else if(index < 36 + numSlots && !this.mergeItemStack(stack, numSlots, 27+numSlots, false)) {
                             return ItemStack.EMPTY;
                         }
-                    } else if(index < 36 + numSlots && !this.mergeItemStack(stack, numSlots, 27+numSlots, false)) {
-                        return ItemStack.EMPTY;
                     }
                 }
+
             }
 
             if(stack.isEmpty()) {
