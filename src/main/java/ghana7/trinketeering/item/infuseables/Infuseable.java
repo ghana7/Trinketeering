@@ -1,5 +1,7 @@
 package ghana7.trinketeering.item.infuseables;
 
+import ghana7.trinketeering.TrinketeeringMod;
+import ghana7.trinketeering.item.equipmentcores.EquipmentCore;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -53,6 +55,37 @@ public abstract class Infuseable extends Item {
             }
         };
     }
+    private ItemStackHandler createEquipmentCoreHandler() {
+        return new ItemStackHandler(1) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                //markDirty();
+            }
+
+            @Override
+            public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+                return stack.getItem() instanceof EquipmentCore;
+            }
+
+            @Override
+            public int getSlotLimit(int slot)
+            {
+                return 1;
+            }
+
+            @Nonnull
+            @Override
+            public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+                return super.insertItem(slot, stack, simulate);
+            }
+
+            @Nonnull
+            @Override
+            public ItemStack extractItem(int slot, int amount, boolean simulate) {
+                return super.extractItem(slot, amount, simulate);
+            }
+        };
+    }
     public IItemHandler getInfusionInventory(ItemStack stack) {
         ItemStackHandler stackHandler = createInfusionHandler();
         stackHandler.deserializeNBT(stack.getOrCreateTag().getCompound("InfusionInventory"));
@@ -63,11 +96,37 @@ public abstract class Infuseable extends Item {
             stack.getOrCreateTag().put("InfusionInventory", ((ItemStackHandler)itemHandler).serializeNBT());
         }
     }
+
+    public ItemStack getEquipmentCoreParent(ItemStack stack) {
+        ItemStackHandler stackHandler = createEquipmentCoreHandler();
+        stackHandler.deserializeNBT(stack.getOrCreateTag().getCompound("EquipmentCoreParent"));
+        return stackHandler.getStackInSlot(0);
+    }
+
+    public void saveEquipmentCoreParent(ItemStack stack, ItemStack equipmentCoreParent) {
+        ItemStackHandler stackHandler = createEquipmentCoreHandler();
+        stackHandler.insertItem(0, equipmentCoreParent, false);
+        stack.getOrCreateTag().put("EquipmentCoreParent", stackHandler.serializeNBT());
+    }
     public void trigger(ItemStack stack, PlayerEntity player) {
         IItemHandler infusionInventory = getInfusionInventory(stack);
         for (int i = 0; i < infusionInventory.getSlots(); i++) {
             if(!infusionInventory.getStackInSlot(i).isEmpty()) {
-                InfusionEffects.handleInfusionEffect(infusionInventory.getStackInSlot(i), player);
+                ItemStack equipmentCoreParent = getEquipmentCoreParent(stack);
+                float effectChance = 1;
+                float effectModifier = 0;
+                if(equipmentCoreParent.getItem() instanceof EquipmentCore) {
+                    effectChance = ((EquipmentCore)equipmentCoreParent.getItem()).getEffectChance();
+                    effectModifier = ((EquipmentCore)equipmentCoreParent.getItem()).getEffectModifier();
+                    TrinketeeringMod.LOGGER.debug("applying chance " + effectChance +" and modifier " + effectModifier);
+                } else {
+                    TrinketeeringMod.LOGGER.warn("no parent core found - this is an error - using defaults of 1 and 0 for chance and modifier");
+                }
+
+                if(random.nextFloat() < effectChance) {
+                    InfusionEffects.handleInfusionEffect(infusionInventory.getStackInSlot(i), player, effectModifier);
+                }
+
             }
         }
     }

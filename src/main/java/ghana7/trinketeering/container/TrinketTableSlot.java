@@ -33,11 +33,16 @@ public class TrinketTableSlot extends SlotItemHandler {
             //TrinketeeringMod.LOGGER.debug("removing equipment core");
             EquipmentCore equipmentCore = (EquipmentCore)stack.getItem();
             IItemHandler inventory = equipmentCore.getInventory(stack);
-            for (int i = 1; i < parentContainer.getInfuseableSlots().getSlots(); i++) {
-                //TrinketeeringMod.LOGGER.debug(parentContainer.getInfuseableSlots().getStackInSlot(i).getStack());
+            IItemHandler parentContainerInventory = parentContainer.getInfuseableSlots();
+            for (int i = 1; i < parentContainerInventory.getSlots(); i++) {
+                //TrinketeeringMod.LOGGER.debug(parentContainerInventory.getStackInSlot(i).getStack());
                 inventory.extractItem(i - 1, 64, false);
-                inventory.insertItem(i - 1, parentContainer.getInfuseableSlots().getStackInSlot(i).getStack(), false);
-                parentContainer.getInfuseableSlots().extractItem(i, 64, false);
+                inventory.insertItem(i - 1, parentContainerInventory.getStackInSlot(i).getStack(), false);
+                if(!parentContainerInventory.getStackInSlot(i).isEmpty()) {
+                    ((Infuseable)parentContainerInventory.getStackInSlot(i).getItem()).saveEquipmentCoreParent(parentContainerInventory.getStackInSlot(i), stack);
+                }
+
+                parentContainerInventory.extractItem(i, 64, false);
             }
             equipmentCore.saveInventory(stack, inventory);
             parentContainer.detectAndSendChanges();

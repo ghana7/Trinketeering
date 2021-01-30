@@ -7,7 +7,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
 public class InfusionEffects {
-    public static void handleInfusionEffect(ItemStack stack, PlayerEntity player) {
+    public static void handleInfusionEffect(ItemStack stack, PlayerEntity player, float effectModifier) {
         String translationKey = stack.getItem().getTranslationKey();
         TrinketeeringMod.LOGGER.debug("" + translationKey + " triggered on player " + player);
         switch(translationKey) {
