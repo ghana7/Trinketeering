@@ -1,12 +1,8 @@
 package ghana7.trinketeering.container;
 
-import ghana7.trinketeering.TrinketeeringMod;
-import ghana7.trinketeering.item.Infuseable;
+import ghana7.trinketeering.item.infuseables.Infuseable;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.common.thread.SidedThreadGroups;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;

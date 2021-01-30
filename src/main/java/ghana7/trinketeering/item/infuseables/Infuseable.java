@@ -1,4 +1,4 @@
-package ghana7.trinketeering.item;
+package ghana7.trinketeering.item.infuseables;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
@@ -14,6 +14,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Infuseable extends Item {
@@ -66,18 +67,30 @@ public abstract class Infuseable extends Item {
         return item == Items.SNOWBALL || item == Items.BLAZE_POWDER;
     }
 
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public List<String> getInfoStrings(ItemStack stack) {
+        List<String> infoStrings = new ArrayList<>();
         CompoundNBT nbt = stack.getOrCreateTag();
         if(nbt.contains("InfusionInventory")) {
             IItemHandler stackHandler = getInfusionInventory(stack);
             for(int i = 0; i < stackHandler.getSlots(); i++) {
                 if(!stackHandler.getStackInSlot(i).isEmpty()) {
-                    tooltip.add(new TranslationTextComponent(stackHandler.getStackInSlot(i).getTranslationKey()));
+                    infoStrings.add(stackHandler.getStackInSlot(i).getTranslationKey());
                 }
             }
         }
+        return infoStrings;
     }
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        CompoundNBT nbt = stack.getOrCreateTag();
+        if(nbt.contains("InfusionInventory")) {
+            List<String> strings = getInfoStrings(stack);
+            for(int i = 0; i < strings.size(); i++) {
+                tooltip.add(new TranslationTextComponent(strings.get(i)).setStyle(Style.EMPTY.setColor(Color.fromHex("#FFAA00"))));
+            }
+        }
+    }
+
 
 }

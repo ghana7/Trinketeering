@@ -1,7 +1,7 @@
-package ghana7.trinketeering.item.gem;
+package ghana7.trinketeering.item.infuseables.gem;
 
 import ghana7.trinketeering.ModItemGroup;
-import ghana7.trinketeering.item.Infuseable;
+import ghana7.trinketeering.item.infuseables.Infuseable;
 import net.minecraft.item.Item;
 
 public abstract class CutGem extends Infuseable {

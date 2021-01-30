@@ -1,5 +1,6 @@
 package ghana7.trinketeering.container;
 
+import ghana7.trinketeering.item.equipmentcores.EquipmentCore;
 import ghana7.trinketeering.item.infuseables.Infuseable;
 import ghana7.trinketeering.registries.BlockRegistry;
 import ghana7.trinketeering.registries.ContainerRegistry;
@@ -19,10 +20,10 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nonnull;
 
-public class InfusionTableContainer extends Container {
+public class TrinketTableContainer extends Container {
     private PlayerEntity playerEntity;
     private IItemHandler playerInventory;
-    private IItemHandler infusionSlots = createHandler();
+    private IItemHandler infuseableSlots = createHandler();
     private ItemStackHandler createHandler() {
         return new ItemStackHandler(5) {
             @Override
@@ -33,7 +34,7 @@ public class InfusionTableContainer extends Container {
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                return InfusionTableContainer.isItemValid(slot, stack);
+                return TrinketTableContainer.isItemValid(slot, stack);
             }
 
             @Override
@@ -57,33 +58,33 @@ public class InfusionTableContainer extends Container {
     }
     private final IWorldPosCallable worldPosCallable;
 
-    public IItemHandler getInfusionSlots() {
-        return infusionSlots;
+    public IItemHandler getInfuseableSlots() {
+        return infuseableSlots;
     }
-    public InfusionTableContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
-        super(ContainerRegistry.INFUSION_TABLE_CONTAINER.get(), windowId);
+    public TrinketTableContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
+        super(ContainerRegistry.TRINKET_TABLE_CONTAINER.get(), windowId);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
         this.worldPosCallable = IWorldPosCallable.of(world, pos);
 
-        InfusionTableSlot slot = (InfusionTableSlot) this.addSlot(new InfusionTableSlot(infusionSlots, 0, 35, 35, this));
+        TrinketTableSlot slot = (TrinketTableSlot) this.addSlot(new TrinketTableSlot(infuseableSlots, 0, 35, 35, this));
         NonNullList<Slot> childSlots = NonNullList.create();
         for(int i = 1; i < 5; i++) {
-            childSlots.add(this.addSlot(new InfusionTableChildSlot(infusionSlots, i, 53 + 18 * i, 35)));
+            childSlots.add(this.addSlot(new TrinketTableChildSlot(infuseableSlots, i, 53 + 18 * i, 35)));
         }
         layoutPlayerInventorySlots(8, 84);
     }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(this.worldPosCallable, playerEntity, BlockRegistry.INFUSION_TABLE.get());
+        return isWithinUsableDistance(this.worldPosCallable, playerEntity, BlockRegistry.TRINKET_TABLE.get());
     }
 
     private static boolean isItemValid(int index, ItemStack stack) {
         if(index == 0) {
-            return stack.getItem() instanceof Infuseable;
+            return stack.getItem() instanceof EquipmentCore;
         } else {
-            return Infuseable.canInfuseWith(stack.getItem());
+            return stack.getItem() instanceof Infuseable;
         }
 
     }

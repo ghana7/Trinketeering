@@ -2,6 +2,7 @@ package ghana7.trinketeering.registries;
 
 import ghana7.trinketeering.TrinketeeringMod;
 import ghana7.trinketeering.container.InfusionTableContainer;
+import ghana7.trinketeering.container.TrinketTableContainer;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,6 +20,14 @@ public class ContainerRegistry {
                 BlockPos pos = data.readBlockPos();
                 World world = inv.player.getEntityWorld();
                 return new InfusionTableContainer(windowId, world, pos, inv, inv.player);
+            }))
+    );
+
+    public static final RegistryObject<ContainerType<TrinketTableContainer>> TRINKET_TABLE_CONTAINER = CONTAINERS.register(
+            "trinket_table", () -> IForgeContainerType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                World world = inv.player.getEntityWorld();
+                return new TrinketTableContainer(windowId, world, pos, inv, inv.player);
             }))
     );
 }
