@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "particle": "trinketeering:block/infusion_table",
-    "north": "trinketeering:block/infusion_table",
-    "south": "trinketeering:block/infusion_table",
-    "east": "trinketeering:block/infusion_table",
-    "west": "trinketeering:block/infusion_table",
-    "up": "trinketeering:block/infusion_table",
-    "down": "trinketeering:block/infusion_table"
+    "particle": "trinketeering:block/trinket_table",
+    "north": "trinketeering:block/trinket_table",
+    "south": "trinketeering:block/trinket_table",
+    "east": "trinketeering:block/trinket_table",
+    "west": "trinketeering:block/trinket_table",
+    "up": "trinketeering:block/trinket_table",
+    "down": "trinketeering:block/trinket_table"
   }
 }

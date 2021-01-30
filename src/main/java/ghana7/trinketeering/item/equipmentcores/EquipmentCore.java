@@ -80,7 +80,7 @@ public abstract class EquipmentCore extends Item {
                     tooltip.add(new TranslationTextComponent(itemStack.getTranslationKey()).setStyle(Style.EMPTY.setColor(Color.fromHex("#00AAAA"))));
                     List<String> infusionStrings = ((Infuseable)itemStack.getItem()).getInfoStrings(itemStack);
                     for(int j = 0; j < infusionStrings.size(); j++) {
-                        tooltip.add(new TranslationTextComponent(infusionStrings.get(i)).setStyle(Style.EMPTY.setColor(Color.fromHex("#FFAA00"))));
+                        tooltip.add(new TranslationTextComponent(infusionStrings.get(j)).setStyle(Style.EMPTY.setColor(Color.fromHex("#FFAA00"))));
                     }
                 }
             }

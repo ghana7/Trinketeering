@@ -1,6 +1,7 @@
 package ghana7.trinketeering.item.infuseables;
 
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -60,6 +61,14 @@ public abstract class Infuseable extends Item {
     public void saveInfusionInventory(ItemStack stack, IItemHandler itemHandler) {
         if(itemHandler instanceof ItemStackHandler) {
             stack.getOrCreateTag().put("InfusionInventory", ((ItemStackHandler)itemHandler).serializeNBT());
+        }
+    }
+    public void trigger(ItemStack stack, PlayerEntity player) {
+        IItemHandler infusionInventory = getInfusionInventory(stack);
+        for (int i = 0; i < infusionInventory.getSlots(); i++) {
+            if(!infusionInventory.getStackInSlot(i).isEmpty()) {
+                InfusionEffects.handleInfusionEffect(infusionInventory.getStackInSlot(i), player);
+            }
         }
     }
     public static boolean canInfuseWith(Item item)

@@ -7,5 +7,9 @@
 
   "item.trinketeering.cut_diamond": "Cut Diamond",
   "item.trinketeering.cut_emerald": "Cut Emerald",
-  "item.trinketeering.cut_lapis": "Cut Lapis"
+  "item.trinketeering.cut_lapis": "Cut Lapis",
+
+  "item.trinketeering.necklace_string": "Necklace String",
+  "block.trinketeering.infusion_table": "Infusion Table",
+  "block.trinketeering.trinket_table": "Trinket Table"
 }
