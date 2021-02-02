@@ -2,6 +2,7 @@ package ghana7.trinketeering.registries;
 
 import ghana7.trinketeering.ModItemGroup;
 import ghana7.trinketeering.TrinketeeringMod;
+import ghana7.trinketeering.item.equipmentcores.EmptyRing;
 import ghana7.trinketeering.item.equipmentcores.NecklaceString;
 import ghana7.trinketeering.item.infuseables.bead.ClayBead;
 import ghana7.trinketeering.item.infuseables.bead.GlassBead;
@@ -46,6 +47,9 @@ public class ItemRegistry {
             new NecklaceString()
     );
 
+    public static final RegistryObject<Item> EMPTY_RING = ITEMS.register("empty_ring", () ->
+            new EmptyRing()
+    );
     //blockitems
     public static final RegistryObject<Item> INFUSION_TABLE_BE = ITEMS.register("infusion_table", () ->
             new BlockItem(BlockRegistry.INFUSION_TABLE.get(),

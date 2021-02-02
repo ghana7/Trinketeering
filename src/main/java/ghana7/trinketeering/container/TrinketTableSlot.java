@@ -35,13 +35,14 @@ public class TrinketTableSlot extends SlotItemHandler {
             IItemHandler inventory = equipmentCore.getInventory(stack);
             IItemHandler parentContainerInventory = parentContainer.getInfuseableSlots();
             for (int i = 1; i < parentContainerInventory.getSlots(); i++) {
-                //TrinketeeringMod.LOGGER.debug(parentContainerInventory.getStackInSlot(i).getStack());
-                inventory.extractItem(i - 1, 64, false);
-                inventory.insertItem(i - 1, parentContainerInventory.getStackInSlot(i).getStack(), false);
-                if(!parentContainerInventory.getStackInSlot(i).isEmpty()) {
-                    ((Infuseable)parentContainerInventory.getStackInSlot(i).getItem()).saveEquipmentCoreParent(parentContainerInventory.getStackInSlot(i), stack);
+                if(i - 1 < inventory.getSlots()) {
+                    //TrinketeeringMod.LOGGER.debug(parentContainerInventory.getStackInSlot(i).getStack());
+                    inventory.extractItem(i - 1, 64, false);
+                    inventory.insertItem(i - 1, parentContainerInventory.getStackInSlot(i).getStack(), false);
+                    if (!parentContainerInventory.getStackInSlot(i).isEmpty()) {
+                        ((Infuseable) parentContainerInventory.getStackInSlot(i).getItem()).saveEquipmentCoreParent(parentContainerInventory.getStackInSlot(i), stack);
+                    }
                 }
-
                 parentContainerInventory.extractItem(i, 64, false);
             }
             equipmentCore.saveInventory(stack, inventory);
@@ -60,8 +61,10 @@ public class TrinketTableSlot extends SlotItemHandler {
                 IItemHandler inventory = equipmentCore.getInventory(stack);
                 for (int i = 1; i < parentContainer.getInfuseableSlots().getSlots(); i++) {
                     //TrinketeeringMod.LOGGER.debug(parentContainer.getInfuseableSlots().getStackInSlot(i).getStack());
-                    parentContainer.getInfuseableSlots().extractItem(i, 64, false);
-                    parentContainer.getInfuseableSlots().insertItem(i, inventory.extractItem(i - 1, 64, false), false);
+                    if(i - 1 < inventory.getSlots()) {
+                        parentContainer.getInfuseableSlots().extractItem(i, 64, false);
+                        parentContainer.getInfuseableSlots().insertItem(i, inventory.extractItem(i - 1, 64, false), false);
+                    }
                 }
                 equipmentCore.saveInventory(stack, inventory);
                 parentContainer.detectAndSendChanges();

@@ -132,7 +132,17 @@ public abstract class Infuseable extends Item {
     }
     public static boolean canInfuseWith(Item item)
     {
-        return item == Items.SNOWBALL || item == Items.BLAZE_POWDER;
+        return item == Items.SNOWBALL ||
+                item == Items.BLAZE_POWDER ||
+                item == Items.POISONOUS_POTATO ||
+                item == Items.GOLDEN_APPLE ||
+                item == Items.TNT ||
+                item == Items.LEATHER_BOOTS ||
+                item == Items.COOKED_BEEF ||
+                item == Items.FIRE_CHARGE ||
+                item == Items.GOLD_INGOT ||
+                item == Items.SHIELD
+                ;
     }
 
     public List<String> getInfoStrings(ItemStack stack) {

@@ -3,6 +3,7 @@ package ghana7.trinketeering.events;
 import ghana7.trinketeering.TrinketeeringMod;
 import ghana7.trinketeering.item.equipmentcores.EquipmentCore;
 import ghana7.trinketeering.item.infuseables.Infuseable;
+import ghana7.trinketeering.item.infuseables.bead.IronBead;
 import ghana7.trinketeering.item.infuseables.gem.CutDiamond;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -65,16 +66,19 @@ public class EventHandlers {
         return infs;
     }
 
+    private <T> void triggerType(PlayerEntity player, Class<T> type) {
+        List<ItemStack> triggeredInfuseables = getInfuseablesOfType(player, type);
+        for (ItemStack stack : triggeredInfuseables) {
+            if(!stack.isEmpty()) {
+                ((Infuseable)stack.getItem()).trigger(stack, player);
+            }
+        }
+    }
     @SubscribeEvent
     public void pickupItem(EntityItemPickupEvent event) {
         if(!event.getPlayer().world.isRemote()) {
             System.out.println("item picked up");
-            List<ItemStack> triggeredInfuseables = getInfuseablesOfType(event.getPlayer(), CutDiamond.class);
-            for (ItemStack stack : triggeredInfuseables) {
-                if(!stack.isEmpty()) {
-                    ((Infuseable)stack.getItem()).trigger(stack, event.getPlayer());
-                }
-            }
+            triggerType(event.getPlayer(), CutDiamond.class);
         }
     }
     @SubscribeEvent
@@ -98,6 +102,7 @@ public class EventHandlers {
             for(int i = 0; i < affectedEntities.size(); i++) {
                 if(affectedEntities.get(i) instanceof PlayerEntity) {
                     TrinketeeringMod.LOGGER.debug("explosion hit player");
+                    triggerType((PlayerEntity) affectedEntities.get(i), IronBead.class);
                 }
             }
         }
