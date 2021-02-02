@@ -3,8 +3,16 @@ package ghana7.trinketeering.events;
 import ghana7.trinketeering.TrinketeeringMod;
 import ghana7.trinketeering.item.equipmentcores.EquipmentCore;
 import ghana7.trinketeering.item.infuseables.Infuseable;
+import ghana7.trinketeering.item.infuseables.bead.ClayBead;
+import ghana7.trinketeering.item.infuseables.bead.CoralBead;
+import ghana7.trinketeering.item.infuseables.bead.QuartzBead;
+import ghana7.trinketeering.item.infuseables.bead.ShellBead;
 import ghana7.trinketeering.item.infuseables.gem.CutDiamond;
+import ghana7.trinketeering.item.infuseables.gem.CutLapis;
+import ghana7.trinketeering.item.infuseables.other.*;
 import ghana7.trinketeering.item.infuseables.plates.IronPlates;
+import ghana7.trinketeering.item.infuseables.plates.StonePlates;
+import ghana7.trinketeering.item.infuseables.plates.WovenPlates;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -24,6 +32,7 @@ import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.items.IItemHandler;
 
@@ -64,7 +73,7 @@ public class EventHandlers {
     public void pickupItem(EntityItemPickupEvent event) {
         if(!event.getPlayer().world.isRemote()) {
             System.out.println("item picked up");
-            triggerType(event.getPlayer(), CutDiamond.class);
+            triggerType(event.getPlayer(), CutLapis.class);
         }
     }
     @SubscribeEvent
@@ -74,6 +83,7 @@ public class EventHandlers {
             ProjectileImpactEvent.Arrow arrowEvent = (ProjectileImpactEvent.Arrow) event;
             if(arrowEvent.getArrow().func_234616_v_() instanceof PlayerEntity) {
                 TrinketeeringMod.LOGGER.debug("arrow shot by player");
+                triggerType((PlayerEntity) event.getArrow().func_234616_v_(), FeatherTrinket.class);
             }
         }
     }
@@ -99,16 +109,20 @@ public class EventHandlers {
         if(!breakEvent.getWorld().isRemote()) {
             if(breakEvent.getState().getBlock().isIn(Tags.Blocks.ORES)) {
                 TrinketeeringMod.LOGGER.debug("ore mined by player");
+                triggerType(breakEvent.getPlayer(), CutDiamond.class);
             }
 
             if(breakEvent.getState().getBlock().isIn(BlockTags.LOGS)) {
                 TrinketeeringMod.LOGGER.debug("wood chopped by player");
+                triggerType(breakEvent.getPlayer(), CarvedBark.class);
             }
 
             if(breakEvent.getState().getBlock().isIn(BlockTags.FLOWERS) ||
                     breakEvent.getState().getBlock() instanceof TallGrassBlock ||
                     breakEvent.getState().getBlock() instanceof DoublePlantBlock) {
                 TrinketeeringMod.LOGGER.debug("grass/flower foraged by player");
+
+                triggerType(breakEvent.getPlayer(), GatheredForage.class);
             }
         }
     }
@@ -117,6 +131,7 @@ public class EventHandlers {
     public void onFishCatch(ItemFishedEvent itemFishedEvent) {
         if(!itemFishedEvent.getEntity().world.isRemote()) {
             TrinketeeringMod.LOGGER.debug("item fished by player");
+            triggerType(itemFishedEvent.getPlayer(), ShellBead.class);
         }
     }
 
@@ -125,11 +140,14 @@ public class EventHandlers {
         if(!livingDamageEvent.getEntity().world.isRemote()) {
             if(livingDamageEvent.getEntity() instanceof PlayerEntity) {
                 TrinketeeringMod.LOGGER.debug("player took damage");
+                triggerType((PlayerEntity)livingDamageEvent.getEntity(), CarvedTooth.class);
                 if(livingDamageEvent.getSource().isFireDamage()) {
                     TrinketeeringMod.LOGGER.debug("player took fire damage");
+                    triggerType((PlayerEntity)livingDamageEvent.getEntity(), ClayBead.class);
                 }
                 if(livingDamageEvent.getSource().getDamageType() == "drown") {
                     TrinketeeringMod.LOGGER.debug("player took drowning damage");
+                    triggerType((PlayerEntity)livingDamageEvent.getEntity(), CoralBead.class);
                 }
                 if(livingDamageEvent.getSource().getTrueSource() instanceof LivingEntity) {
                     double playerYaw = ((PlayerEntity)livingDamageEvent.getEntity()).rotationYaw;
@@ -140,6 +158,7 @@ public class EventHandlers {
                     double diff = (modDirYaw - playerYaw + 720) % 360;
                     if(diff < 90 || diff > 270) {
                         TrinketeeringMod.LOGGER.debug("player hit from behind");
+                        triggerType((PlayerEntity)livingDamageEvent.getEntity(), StonePlates.class);
                     }
                 }
             }
@@ -152,6 +171,8 @@ public class EventHandlers {
             if(livingFallEvent.getEntity() instanceof PlayerEntity) {
                 if(livingFallEvent.getDistance() > 3.0f) {
                     TrinketeeringMod.LOGGER.debug("player took fall damage - dist: " + livingFallEvent.getDistance());
+
+                    triggerType((PlayerEntity)livingFallEvent.getEntity(), WovenPlates.class);
                 }
 
             }
@@ -164,6 +185,7 @@ public class EventHandlers {
             BlockState blockState = playerInteractEvent.getWorld().getBlockState(playerInteractEvent.getPos());
             if(blockState.getBlock() == Blocks.CAKE && blockState.get(BlockStateProperties.BITES_0_6) == 6) {
                 TrinketeeringMod.LOGGER.debug("cake finished by player");
+                triggerType(playerInteractEvent.getPlayer(), Leftovers.class);
             }
         }
     }
@@ -173,6 +195,7 @@ public class EventHandlers {
         if(!event.getEntity().world.isRemote()) {
             if(event.getSource().getTrueSource() instanceof PlayerEntity && event.getEntity() instanceof LivingEntity) {
                 TrinketeeringMod.LOGGER.debug("living entity killed by player");
+                triggerType((PlayerEntity) event.getSource().getTrueSource(), BloodyGiblets.class);
             }
         }
     }
@@ -182,10 +205,8 @@ public class EventHandlers {
         if(!event.getTarget().world.isRemote()) {
             if(event.isVanillaCritical()) {
                 TrinketeeringMod.LOGGER.debug("player crit");
+                triggerType(event.getPlayer(), QuartzBead.class);
             }
-
         }
     }
-
-
 }
