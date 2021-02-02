@@ -2,6 +2,7 @@ package ghana7.trinketeering.registries;
 
 import ghana7.trinketeering.ModItemGroup;
 import ghana7.trinketeering.TrinketeeringMod;
+import ghana7.trinketeering.item.CarvingKnife;
 import ghana7.trinketeering.item.equipmentcores.EmptyRing;
 import ghana7.trinketeering.item.equipmentcores.NecklaceString;
 import ghana7.trinketeering.item.infuseables.bead.*;
@@ -19,6 +20,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TrinketeeringMod.MODID);
+
+    public static final RegistryObject<Item> CARVING_KNIFE = ITEMS.register("carving_knife", () ->
+            new CarvingKnife()
+    );
 
     public static final RegistryObject<Item> CLAY_BEAD = ITEMS.register("clay_bead", () ->
             new ClayBead()

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " l ",
+    "f f",
+    " f "
+  ],
+  "key": {
+    "l": {
+      "tag": "forge:leather"
+    },
+    "f": {
+      "tag": "minecraft:leaves"
+    }
+  },
+  "result": {
+    "item": "trinketeering:gathered_forage",
+    "count": 1
+  }
+}

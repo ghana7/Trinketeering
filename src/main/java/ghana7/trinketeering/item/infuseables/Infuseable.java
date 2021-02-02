@@ -23,7 +23,7 @@ import java.util.List;
 
 public abstract class Infuseable extends Item {
     public Infuseable() {
-        super(new Item.Properties().group(ModItemGroup.TRINKETS));
+        super(new Item.Properties().group(ModItemGroup.TRINKETS).maxStackSize(1));
     }
     private ItemStackHandler createInfusionHandler() {
         return new ItemStackHandler(4) {

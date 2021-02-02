@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " l ",
+    "l l",
+    " l "
+  ],
+  "key": {
+    "l": {
+      "tag": "minecraft:corals"
+    }
+  },
+  "result": {
+    "item": "trinketeering:coral_bead",
+    "count": 1
+  }
+}

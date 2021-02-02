@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " l ",
+    "l l",
+    " l "
+  ],
+  "key": {
+    "l": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "trinketeering:clay_bead",
+    "count": 1
+  }
+}

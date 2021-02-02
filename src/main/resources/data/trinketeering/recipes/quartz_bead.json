@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " l ",
+    "l l",
+    " l "
+  ],
+  "key": {
+    "l": {
+      "tag": "forge:gems/quartz"
+    }
+  },
+  "result": {
+    "item": "trinketeering:quartz_bead",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pwp",
+    "www",
+    "pwp"
+  ],
+  "key": {
+    "p": {
+      "tag": "forge:ingots/iron"
+    },
+    "w": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "trinketeering:iron_plates",
+    "count": 1
+  }
+}

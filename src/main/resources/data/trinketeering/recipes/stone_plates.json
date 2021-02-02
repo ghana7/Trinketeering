@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pwp",
+    "www",
+    "pwp"
+  ],
+  "key": {
+    "p": {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    "w": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "trinketeering:stone_plates",
+    "count": 1
+  }
+}

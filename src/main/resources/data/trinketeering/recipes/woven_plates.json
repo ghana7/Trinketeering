@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pwp",
+    "www",
+    "pwp"
+  ],
+  "key": {
+    "p": {
+      "tag": "minecraft:wool"
+    },
+    "w": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "trinketeering:woven_plates",
+    "count": 1
+  }
+}

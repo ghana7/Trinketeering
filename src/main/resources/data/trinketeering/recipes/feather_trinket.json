@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " l ",
+    "f f",
+    " f "
+  ],
+  "key": {
+    "l": {
+      "tag": "forge:leather"
+    },
+    "f": {
+      "tag": "forge:feathers"
+    }
+  },
+  "result": {
+    "item": "trinketeering:feather_trinket",
+    "count": 1
+  }
+}
