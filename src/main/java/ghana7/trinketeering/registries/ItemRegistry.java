@@ -24,9 +24,9 @@ public class ItemRegistry {
             new ClayBead()
     );
 
-    public static final RegistryObject<Item> GLASS_BEAD = ITEMS.register("glass_bead", () ->
-            new GlassBead()
-    );
+    //public static final RegistryObject<Item> GLASS_BEAD = ITEMS.register("glass_bead", () ->
+    //        new GlassBead()
+    //);
 
     public static final RegistryObject<Item> QUARTZ_BEAD = ITEMS.register("quartz_bead", () ->
             new QuartzBead()
