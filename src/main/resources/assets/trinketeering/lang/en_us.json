@@ -1,13 +1,23 @@
 {
   "itemGroup.trinkets": "Trinkets",
 
-  "item.trinketeering.iron_bead": "Iron Bead",
   "item.trinketeering.clay_bead": "Clay Bead",
   "item.trinketeering.glass_bead": "Glass Bead",
-
+  "item.trinketeering.quartz_bead": "Quartz Bead",
   "item.trinketeering.cut_diamond": "Cut Diamond",
   "item.trinketeering.cut_emerald": "Cut Emerald",
   "item.trinketeering.cut_lapis": "Cut Lapis",
+  "item.trinketeering.carved_tooth": "Carved Tooth",
+  "item.trinketeering.carved_bark": "Carved Bark",
+  "item.trinketeering.feather_trinket": "Feather Trinket",
+  "item.trinketeering.coral_bead": "Coral Bead",
+  "item.trinketeering.shell_bead": "Shell Bead",
+  "item.trinketeering.gathered_forage": "Gathered Forage",
+  "item.trinketeering.bloody_giblets": "Bloody Giblets",
+  "item.trinketeering.leftovers": "Leftovers",
+  "item.trinketeering.woven_plates": "Woven Plates",
+  "item.trinketeering.iron_plates": "Iron Plates",
+  "item.trinketeering.stone_plates": "Stone Plates",
 
   "item.trinketeering.necklace_string": "Necklace String",
   "item.trinketeering.empty_ring": "Empty Ring",

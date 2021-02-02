@@ -6,6 +6,6 @@ import net.minecraft.item.Item;
 
 public abstract class CutGem extends Infuseable {
     public CutGem() {
-        super(new Item.Properties().group(ModItemGroup.TRINKETS));
+        super();
     }
 }

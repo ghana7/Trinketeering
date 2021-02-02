@@ -1,7 +1,7 @@
 package ghana7.trinketeering.item.infuseables.bead;
 
-public class IronBead extends Bead{
-    public IronBead() {
+public class QuartzBead extends Bead{
+    public QuartzBead() {
         super();
     }
 }

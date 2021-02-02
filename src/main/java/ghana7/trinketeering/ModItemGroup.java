@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 public class ModItemGroup extends ItemGroup {
     private Supplier<ItemStack> displayStack;
 
-    public static final ModItemGroup TRINKETS = new ModItemGroup("trinkets", () -> new ItemStack(ItemRegistry.IRON_BEAD.get()));
+    public static final ModItemGroup TRINKETS = new ModItemGroup("trinkets", () -> new ItemStack(ItemRegistry.CLAY_BEAD.get()));
 
     private ModItemGroup(String label, Supplier<ItemStack> displayStack) {
         super(label);

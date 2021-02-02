@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "trinketeering:item/cut_emerald"
+    "layer0": "trinketeering:item/gathered_forage"
   }
 }

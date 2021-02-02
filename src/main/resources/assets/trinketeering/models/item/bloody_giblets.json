@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "trinketeering:item/iron_bead"
+    "layer0": "trinketeering:item/bloody_giblets"
   }
 }

@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 public abstract class Bead extends Infuseable {
 
     public Bead() {
-        super(new Item.Properties().group(ModItemGroup.TRINKETS));
+        super();
     }
 
 

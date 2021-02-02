@@ -1,5 +1,6 @@
 package ghana7.trinketeering.item.infuseables;
 
+import ghana7.trinketeering.ModItemGroup;
 import ghana7.trinketeering.TrinketeeringMod;
 import ghana7.trinketeering.item.equipmentcores.EquipmentCore;
 import net.minecraft.client.util.ITooltipFlag;
@@ -21,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Infuseable extends Item {
-    public Infuseable(Properties properties) {
-        super(properties);
+    public Infuseable() {
+        super(new Item.Properties().group(ModItemGroup.TRINKETS));
     }
     private ItemStackHandler createInfusionHandler() {
         return new ItemStackHandler(4) {

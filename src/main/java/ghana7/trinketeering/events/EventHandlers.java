@@ -3,45 +3,31 @@ package ghana7.trinketeering.events;
 import ghana7.trinketeering.TrinketeeringMod;
 import ghana7.trinketeering.item.equipmentcores.EquipmentCore;
 import ghana7.trinketeering.item.infuseables.Infuseable;
-import ghana7.trinketeering.item.infuseables.bead.IronBead;
 import ghana7.trinketeering.item.infuseables.gem.CutDiamond;
+import ghana7.trinketeering.item.infuseables.plates.IronPlates;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.IAngerable;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.EndermanEntity;
-import net.minecraft.entity.monster.SpiderEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.items.IItemHandler;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class EventHandlers {
@@ -102,7 +88,7 @@ public class EventHandlers {
             for(int i = 0; i < affectedEntities.size(); i++) {
                 if(affectedEntities.get(i) instanceof PlayerEntity) {
                     TrinketeeringMod.LOGGER.debug("explosion hit player");
-                    triggerType((PlayerEntity) affectedEntities.get(i), IronBead.class);
+                    triggerType((PlayerEntity) affectedEntities.get(i), IronPlates.class);
                 }
             }
         }
