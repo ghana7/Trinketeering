@@ -33,7 +33,7 @@ public class InfusionEffects {
                     getRandomNearbyEntity(player).addPotionEffect(new EffectInstance(Effects.POISON, 200, (int)(1+effectModifier)));
                 break;
             case "item.minecraft.shield":
-                getAllNearbyEntities(player).forEach((LivingEntity entity) -> {entity.setMotion(entity.getPositionVec().subtract(player.getPositionVec()).normalize().mul(2.0f * effectModifier,2.0f * effectModifier,2.0f * effectModifier));});
+                getAllNearbyEntities(player).forEach((LivingEntity entity) -> {entity.setMotion(entity.getPositionVec().subtract(player.getPositionVec()).add(0, 5, 0).normalize().mul(2.0f * effectModifier,2.0f * effectModifier,2.0f * effectModifier));});
                 break;
             case "item.minecraft.golden_apple":
                 player.heal(2.0f * effectModifier);
