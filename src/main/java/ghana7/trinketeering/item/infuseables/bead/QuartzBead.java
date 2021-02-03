@@ -4,4 +4,9 @@ public class QuartzBead extends Bead{
     public QuartzBead() {
         super();
     }
+
+    @Override
+    public String getConditionText() {
+        return "On critical hit...";
+    }
 }

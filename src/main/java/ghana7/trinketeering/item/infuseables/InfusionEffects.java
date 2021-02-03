@@ -59,6 +59,32 @@ public class InfusionEffects {
         }
     }
 
+    public static String getResultText(String itemTranslationKey) {
+        switch(itemTranslationKey) {
+            case "item.minecraft.snowball":
+                return "Slow a nearby enemy";
+            case "item.minecraft.blaze_powder":
+                return "Burn a nearby enemy";
+            case "item.minecraft.poisonous_potato":
+                return "Poison a nearby enemy";
+            case "item.minecraft.shield":
+                return "Knock back all nearby enemies";
+            case "item.minecraft.golden_apple":
+                return "Heal";
+            case "block.minecraft.tnt":
+                return "Explode!";
+            case "item.minecraft.leather_boots":
+                return "Gain slow falling";
+            case "item.minecraft.cooked_beef":
+                return "Gain saturation";
+            case "item.minecraft.fire_charge":
+                return "Gain fire resistance";
+            case "item.minecraft.gold_ingot":
+                return "Gain haste";
+            default:
+                return "";
+        }
+    }
     @Nullable
     private static LivingEntity getRandomNearbyEntity(PlayerEntity player) {
         World world = player.getEntityWorld();

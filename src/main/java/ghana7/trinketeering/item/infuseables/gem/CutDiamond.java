@@ -5,4 +5,9 @@ public class CutDiamond extends CutGem{
         super();
     }
 
+
+    @Override
+    public String getConditionText() {
+        return "When ore mined...";
+    }
 }

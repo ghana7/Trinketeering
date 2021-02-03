@@ -145,6 +145,7 @@ public abstract class Infuseable extends Item {
                 item == Items.SHIELD
                 ;
     }
+    public abstract String getConditionText();
 
     public List<String> getInfoStrings(ItemStack stack) {
         List<String> infoStrings = new ArrayList<>();
@@ -164,9 +165,11 @@ public abstract class Infuseable extends Item {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         CompoundNBT nbt = stack.getOrCreateTag();
         if(nbt.contains("InfusionInventory")) {
+            tooltip.add(new StringTextComponent(getConditionText()).setStyle(Style.EMPTY.setColor(Color.fromHex("#AA00AA"))));
             List<String> strings = getInfoStrings(stack);
             for(int i = 0; i < strings.size(); i++) {
                 tooltip.add(new TranslationTextComponent(strings.get(i)).setStyle(Style.EMPTY.setColor(Color.fromHex("#FFAA00"))));
+                tooltip.add(new TranslationTextComponent(InfusionEffects.getResultText(strings.get(i))).setStyle(Style.EMPTY.setColor(Color.fromHex("#AA00AA"))));
             }
         }
     }
