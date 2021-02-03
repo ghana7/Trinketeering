@@ -30,7 +30,7 @@ public class TrinketTableSlot extends SlotItemHandler {
     @Override
     public ItemStack onTake(PlayerEntity player, ItemStack stack) {
         if(!player.getEntityWorld().isRemote) {
-            //TrinketeeringMod.LOGGER.debug("removing equipment core");
+            TrinketeeringMod.LOGGER.debug("trinket table onTake");
             EquipmentCore equipmentCore = (EquipmentCore)stack.getItem();
             IItemHandler inventory = equipmentCore.getInventory(stack);
             IItemHandler parentContainerInventory = parentContainer.getInfuseableSlots();
@@ -44,6 +44,7 @@ public class TrinketTableSlot extends SlotItemHandler {
                     }
                 }
                 parentContainerInventory.extractItem(i, 64, false);
+                parentContainer.sendUpdatePacket(i, ItemStack.EMPTY);
             }
             equipmentCore.saveInventory(stack, inventory);
             parentContainer.detectAndSendChanges();
@@ -56,6 +57,7 @@ public class TrinketTableSlot extends SlotItemHandler {
     public void putStack(ItemStack stack) {
         if(Thread.currentThread().getThreadGroup() == SidedThreadGroups.SERVER) {
             if(stack.getItem() instanceof EquipmentCore) {
+                TrinketeeringMod.LOGGER.debug("trinket table putStack");
                 //TrinketeeringMod.LOGGER.debug("inserting equipment core");
                 EquipmentCore equipmentCore = (EquipmentCore)stack.getItem();
                 IItemHandler inventory = equipmentCore.getInventory(stack);
@@ -63,7 +65,9 @@ public class TrinketTableSlot extends SlotItemHandler {
                     //TrinketeeringMod.LOGGER.debug(parentContainer.getInfuseableSlots().getStackInSlot(i).getStack());
                     if(i - 1 < inventory.getSlots()) {
                         parentContainer.getInfuseableSlots().extractItem(i, 64, false);
-                        parentContainer.getInfuseableSlots().insertItem(i, inventory.extractItem(i - 1, 64, false), false);
+                        ItemStack itemToInsert = inventory.extractItem(i - 1, 64, false);
+                        parentContainer.getInfuseableSlots().insertItem(i, itemToInsert, false);
+                        parentContainer.sendUpdatePacket(i, itemToInsert);
                     }
                 }
                 equipmentCore.saveInventory(stack, inventory);

@@ -6,9 +6,11 @@ import ghana7.trinketeering.registries.BlockRegistry;
 import ghana7.trinketeering.registries.ContainerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.SSetSlotPacket;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -63,6 +65,7 @@ public class TrinketTableContainer extends Container {
     }
     public TrinketTableContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
         super(ContainerRegistry.TRINKET_TABLE_CONTAINER.get(), windowId);
+
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
         this.worldPosCallable = IWorldPosCallable.of(world, pos);
@@ -75,6 +78,9 @@ public class TrinketTableContainer extends Container {
         layoutPlayerInventorySlots(8, 84);
     }
 
+    public void sendUpdatePacket(int slot, ItemStack itemStack){
+        ((ServerPlayerEntity)playerEntity).connection.sendPacket(new SSetSlotPacket(windowId, slot, itemStack));
+    }
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
         return isWithinUsableDistance(this.worldPosCallable, playerEntity, BlockRegistry.TRINKET_TABLE.get());

@@ -36,6 +36,7 @@ public class InfusionTableSlot extends SlotItemHandler {
                 inventory.extractItem(i - 1, 64, false);
                 inventory.insertItem(i - 1, parentContainer.getInfusionSlots().getStackInSlot(i).getStack(), false);
                 parentContainer.getInfusionSlots().extractItem(i, 64, false);
+                parentContainer.sendUpdatePacket(i, ItemStack.EMPTY);
             }
             infuseable.saveInfusionInventory(stack, inventory);
             parentContainer.detectAndSendChanges();
@@ -54,7 +55,9 @@ public class InfusionTableSlot extends SlotItemHandler {
                 for (int i = 1; i < parentContainer.getInfusionSlots().getSlots(); i++) {
                     //TrinketeeringMod.LOGGER.debug(parentContainer.getInfusionSlots().getStackInSlot(i).getStack());
                     parentContainer.getInfusionSlots().extractItem(i, 64, false);
-                    parentContainer.getInfusionSlots().insertItem(i, inventory.extractItem(i - 1, 64, false), false);
+                    ItemStack itemToInsert = inventory.extractItem(i - 1, 64, false);
+                    parentContainer.getInfusionSlots().insertItem(i, itemToInsert, false);
+                    parentContainer.sendUpdatePacket(i, itemToInsert);
                 }
                 infuseable.saveInfusionInventory(stack, inventory);
                 parentContainer.detectAndSendChanges();
