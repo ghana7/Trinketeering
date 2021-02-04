@@ -5,9 +5,6 @@ import net.minecraft.item.Item;
 
 public class NecklaceString extends EquipmentCore{
 
-    public NecklaceString() {
-        super(new Item.Properties().group(ModItemGroup.TRINKETS));
-    }
 
     @Override
     public int getNumInfuseables() {

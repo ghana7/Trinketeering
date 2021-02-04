@@ -142,7 +142,8 @@ public abstract class Infuseable extends Item {
                 item == Items.COOKED_BEEF ||
                 item == Items.FIRE_CHARGE ||
                 item == Items.GOLD_INGOT ||
-                item == Items.SHIELD
+                item == Items.SHIELD ||
+                item == Items.ENDER_EYE
                 ;
     }
     public abstract String getConditionText();

@@ -33,7 +33,7 @@ public class InfusionEffects {
                     getRandomNearbyEntity(player).addPotionEffect(new EffectInstance(Effects.POISON, 200, (int)(1+effectModifier)));
                 break;
             case "item.minecraft.shield":
-                getAllNearbyEntities(player).forEach((LivingEntity entity) -> {entity.setMotion(entity.getPositionVec().subtract(player.getPositionVec()).add(0, 5, 0).normalize().mul(2.0f * effectModifier,2.0f * effectModifier,2.0f * effectModifier));});
+                getAllNearbyEntities(player).forEach((LivingEntity entity) -> {entity.setMotion(entity.getPositionVec().subtract(player.getPositionVec()).add(0, 3, 0).normalize().mul(2.0f * effectModifier,2.0f * effectModifier,2.0f * effectModifier));});
                 break;
             case "item.minecraft.golden_apple":
                 player.heal(2.0f * effectModifier);
@@ -53,6 +53,8 @@ public class InfusionEffects {
             case "item.minecraft.gold_ingot":
                 player.addPotionEffect(new EffectInstance(Effects.HASTE, 200, (int)(1+effectModifier)));
                 break;
+            case "item.minecraft.ender_eye":
+                getAllNearbyEntities(player).forEach((LivingEntity entity) -> {entity.setMotion(entity.getPositionVec().subtractReverse(player.getPositionVec()).add(0, 3, 0).normalize().mul(2.0f * effectModifier,2.0f * effectModifier,2.0f * effectModifier));});
             default:
                 TrinketeeringMod.LOGGER.debug("no infusion effect found for " + translationKey);
                 break;
@@ -81,6 +83,8 @@ public class InfusionEffects {
                 return "Gain fire resistance";
             case "item.minecraft.gold_ingot":
                 return "Gain haste";
+            case "item.minecraft.ender_eye":
+                return "Pull in all nearby enemies";
             default:
                 return "";
         }

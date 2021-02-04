@@ -3,6 +3,7 @@ package ghana7.trinketeering.registries;
 import ghana7.trinketeering.ModItemGroup;
 import ghana7.trinketeering.TrinketeeringMod;
 import ghana7.trinketeering.item.CarvingKnife;
+import ghana7.trinketeering.item.equipmentcores.Crown;
 import ghana7.trinketeering.item.equipmentcores.EmptyRing;
 import ghana7.trinketeering.item.equipmentcores.NecklaceString;
 import ghana7.trinketeering.item.infuseables.bead.*;
@@ -95,6 +96,10 @@ public class ItemRegistry {
 
     public static final RegistryObject<Item> EMPTY_RING = ITEMS.register("empty_ring", () ->
             new EmptyRing()
+    );
+
+    public static final RegistryObject<Item> CROWN = ITEMS.register("crown", () ->
+            new Crown()
     );
     //blockitems
     public static final RegistryObject<Item> INFUSION_TABLE_BE = ITEMS.register("infusion_table", () ->

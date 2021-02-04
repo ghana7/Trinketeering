@@ -1,10 +1,20 @@
 package ghana7.trinketeering.item.equipmentcores;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import ghana7.trinketeering.ModItemGroup;
+import ghana7.trinketeering.client.ArmorBaseModel;
+import ghana7.trinketeering.client.ClientArmorHelper;
 import ghana7.trinketeering.item.infuseables.Infuseable;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.Color;
 import net.minecraft.util.text.ITextComponent;
@@ -19,14 +29,28 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Supplier;
 
-public abstract class EquipmentCore extends Item implements IEquipmentCore {
-    public EquipmentCore() {
-        super(new Item.Properties().group(ModItemGroup.TRINKETS));
+public class Crown extends ArmorItem implements IEquipmentCore{
+    public Crown() {
+        super(ArmorMaterial.GOLD, EquipmentSlotType.HEAD, (new Item.Properties()).group(ModItemGroup.TRINKETS));
+
     }
-    public abstract int getNumInfuseables();
-    public abstract float getEffectChance();
-    public abstract float getEffectModifier();
+
+    @Override
+    public int getNumInfuseables() {
+        return 4;
+    }
+
+    @Override
+    public float getEffectChance() {
+        return 1;
+    }
+
+    @Override
+    public float getEffectModifier() {
+        return 2;
+    }
 
     private ItemStackHandler createItemHandler() {
         return new ItemStackHandler(getNumInfuseables()) {
@@ -87,4 +111,20 @@ public abstract class EquipmentCore extends Item implements IEquipmentCore {
             }
         }
     }
+
+    @Nullable
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+        return ClientArmorHelper.getCrownArmor().getTexture();
+    }
+
+    @Nullable
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public BipedModel getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, BipedModel _default) {
+        return ClientArmorHelper.getCrownArmor().applyEntityStats(_default).applySlot(armorSlot);
+    }
+
+
 }

@@ -1,23 +1,20 @@
 package ghana7.trinketeering.item.equipmentcores;
 
-import ghana7.trinketeering.ModItemGroup;
-import net.minecraft.item.Item;
-
-public class EmptyRing extends EquipmentCore{
+public class EarringHooks extends EquipmentCore{
 
     @Override
     public int getNumInfuseables() {
-        return 1;
+        return 2;
     }
 
     @Override
     public float getEffectChance() {
-        return 1;
+        return 0.5f;
     }
 
     @Override
     public float getEffectModifier() {
-        return 1;
+        return 2;
     }
 
 
