@@ -1,7 +1,9 @@
 package ghana7.trinketeering.container;
 
 import ghana7.trinketeering.TrinketeeringMod;
+import ghana7.trinketeering.item.equipmentcores.Crown;
 import ghana7.trinketeering.item.equipmentcores.EquipmentCore;
+import ghana7.trinketeering.item.equipmentcores.IEquipmentCore;
 import ghana7.trinketeering.item.infuseables.Infuseable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,7 +20,7 @@ public class TrinketTableSlot extends SlotItemHandler {
 
     @Override
     public boolean isItemValid(ItemStack stack) {
-        return stack.getItem() instanceof EquipmentCore;
+        return stack.getItem() instanceof EquipmentCore || stack.getItem() instanceof Crown;
     }
 
     @Override
@@ -31,7 +33,7 @@ public class TrinketTableSlot extends SlotItemHandler {
     public ItemStack onTake(PlayerEntity player, ItemStack stack) {
         if(!player.getEntityWorld().isRemote) {
             TrinketeeringMod.LOGGER.debug("trinket table onTake");
-            EquipmentCore equipmentCore = (EquipmentCore)stack.getItem();
+            IEquipmentCore equipmentCore = (IEquipmentCore)stack.getItem();
             IItemHandler inventory = equipmentCore.getInventory(stack);
             IItemHandler parentContainerInventory = parentContainer.getInfuseableSlots();
             for (int i = 1; i < parentContainerInventory.getSlots(); i++) {
@@ -56,10 +58,10 @@ public class TrinketTableSlot extends SlotItemHandler {
     @Override
     public void putStack(ItemStack stack) {
         if(Thread.currentThread().getThreadGroup() == SidedThreadGroups.SERVER) {
-            if(stack.getItem() instanceof EquipmentCore) {
+            if(stack.getItem() instanceof IEquipmentCore) {
                 TrinketeeringMod.LOGGER.debug("trinket table putStack");
                 //TrinketeeringMod.LOGGER.debug("inserting equipment core");
-                EquipmentCore equipmentCore = (EquipmentCore)stack.getItem();
+                IEquipmentCore equipmentCore = (IEquipmentCore)stack.getItem();
                 IItemHandler inventory = equipmentCore.getInventory(stack);
                 for (int i = 1; i < parentContainer.getInfuseableSlots().getSlots(); i++) {
                     //TrinketeeringMod.LOGGER.debug(parentContainer.getInfuseableSlots().getStackInSlot(i).getStack());

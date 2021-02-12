@@ -3,9 +3,7 @@ package ghana7.trinketeering.registries;
 import ghana7.trinketeering.ModItemGroup;
 import ghana7.trinketeering.TrinketeeringMod;
 import ghana7.trinketeering.item.CarvingKnife;
-import ghana7.trinketeering.item.equipmentcores.Crown;
-import ghana7.trinketeering.item.equipmentcores.EmptyRing;
-import ghana7.trinketeering.item.equipmentcores.NecklaceString;
+import ghana7.trinketeering.item.equipmentcores.*;
 import ghana7.trinketeering.item.infuseables.bead.*;
 import ghana7.trinketeering.item.infuseables.gem.CutDiamond;
 import ghana7.trinketeering.item.infuseables.gem.CutLapis;
@@ -100,6 +98,18 @@ public class ItemRegistry {
 
     public static final RegistryObject<Item> CROWN = ITEMS.register("crown", () ->
             new Crown()
+    );
+
+    public static final RegistryObject<Item> BRACELET_STRING = ITEMS.register("bracelet_string", () ->
+            new BraceletString()
+    );
+
+    public static final RegistryObject<Item> AMULET_CORE = ITEMS.register("amulet_core", () ->
+            new AmuletCore()
+    );
+
+    public static final RegistryObject<Item> EARRING_HOOKS = ITEMS.register("earring_hooks", () ->
+            new EarringHooks()
     );
     //blockitems
     public static final RegistryObject<Item> INFUSION_TABLE_BE = ITEMS.register("infusion_table", () ->

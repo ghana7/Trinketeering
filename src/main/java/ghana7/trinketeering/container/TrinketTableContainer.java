@@ -1,5 +1,6 @@
 package ghana7.trinketeering.container;
 
+import ghana7.trinketeering.item.equipmentcores.Crown;
 import ghana7.trinketeering.item.equipmentcores.EquipmentCore;
 import ghana7.trinketeering.item.infuseables.Infuseable;
 import ghana7.trinketeering.registries.BlockRegistry;
@@ -86,9 +87,9 @@ public class TrinketTableContainer extends Container {
         return isWithinUsableDistance(this.worldPosCallable, playerEntity, BlockRegistry.TRINKET_TABLE.get());
     }
 
-    private static boolean isItemValid(int index, ItemStack stack) {
+    public static boolean isItemValid(int index, ItemStack stack) {
         if(index == 0) {
-            return stack.getItem() instanceof EquipmentCore;
+            return stack.getItem() instanceof EquipmentCore || stack.getItem() instanceof Crown;
         } else {
             return stack.getItem() instanceof Infuseable;
         }

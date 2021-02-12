@@ -165,8 +165,8 @@ public abstract class Infuseable extends Item {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         CompoundNBT nbt = stack.getOrCreateTag();
+        tooltip.add(new StringTextComponent(getConditionText()).setStyle(Style.EMPTY.setColor(Color.fromHex("#AA00AA"))));
         if(nbt.contains("InfusionInventory")) {
-            tooltip.add(new StringTextComponent(getConditionText()).setStyle(Style.EMPTY.setColor(Color.fromHex("#AA00AA"))));
             List<String> strings = getInfoStrings(stack);
             for(int i = 0; i < strings.size(); i++) {
                 tooltip.add(new TranslationTextComponent(strings.get(i)).setStyle(Style.EMPTY.setColor(Color.fromHex("#FFAA00"))));

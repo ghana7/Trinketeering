@@ -20,6 +20,10 @@
   "item.trinketeering.carving_knife": "Carving Knife",
   "item.trinketeering.necklace_string": "Necklace String",
   "item.trinketeering.empty_ring": "Empty Ring",
+  "item.trinketeering.crown": "Crown",
+  "item.trinketeering.bracelet_string": "Bracelet String",
+  "item.trinketeering.earring_hooks": "Earring Hooks",
+  "item.trinketeering.amulet_core": "Amulet Core",
   "block.trinketeering.infusion_table": "Infusion Table",
   "block.trinketeering.trinket_table": "Trinket Table"
 }
