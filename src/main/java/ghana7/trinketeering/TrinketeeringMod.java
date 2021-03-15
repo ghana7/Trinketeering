@@ -7,7 +7,10 @@ import ghana7.trinketeering.registries.BlockRegistry;
 import ghana7.trinketeering.registries.ContainerRegistry;
 import ghana7.trinketeering.registries.ItemRegistry;
 import ghana7.trinketeering.registries.TileEntityRegistry;
+import jdk.nashorn.internal.ir.Block;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -39,6 +42,8 @@ public class TrinketeeringMod {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
+        RenderTypeLookup.setRenderLayer(BlockRegistry.INFUSION_TABLE.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockRegistry.TRINKET_TABLE.get(), RenderType.getCutout());
         // do something that can only be done on the client
         ScreenManager.registerFactory(ContainerRegistry.INFUSION_TABLE_CONTAINER.get(), InfusionTableScreen::new);
         ScreenManager.registerFactory(ContainerRegistry.TRINKET_TABLE_CONTAINER.get(), TrinketTableScreen::new);

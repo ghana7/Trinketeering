@@ -1,5 +1,19 @@
 {
   "variants": {
-    "": { "model": "trinketeering:block/infusion_table" }
+    "facing=east": {
+      "model": "trinketeering:block/infusion_table",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "trinketeering:block/infusion_table"
+    },
+    "facing=south": {
+      "model": "trinketeering:block/infusion_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "trinketeering:block/infusion_table",
+      "y": 270
+    }
   }
 }
