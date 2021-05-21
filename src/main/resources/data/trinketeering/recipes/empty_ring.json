@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " g ",
+    "g g",
+    " g "
+  ],
+  "key": {
+    "g": {
+      "tag": "forge:ingots/gold"
+    }
+  },
+  "result": {
+    "item": "trinketeering:empty_ring",
+    "count": 1
+  }
+}

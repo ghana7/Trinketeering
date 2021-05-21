@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "n n",
+    "g g"
+  ],
+  "key": {
+    "g": {
+      "tag": "forge:ingots/gold"
+    },
+    "n": {
+      "tag": "forge:nuggets/gold"
+    }
+  },
+  "result": {
+    "item": "trinketeering:earring_hooks",
+    "count": 1
+  }
+}
