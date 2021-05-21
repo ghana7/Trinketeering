@@ -6,10 +6,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.Color;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -73,16 +70,34 @@ public abstract class EquipmentCore extends Item implements IEquipmentCore {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         CompoundNBT nbt = stack.getOrCreateTag();
+        EquipmentCore coreItem = (EquipmentCore) stack.getItem();
+        tooltip.add(
+                new StringTextComponent("Slots: " + coreItem.getNumInfuseables())
+                        .setStyle(Style.EMPTY.setColor(Color.fromHex("#FF5555"))).append(
+                new StringTextComponent(" Chance: " + coreItem.getEffectChance())
+                        .setStyle(Style.EMPTY.setColor(Color.fromHex("#55FF55")))).append(
+                new StringTextComponent(" Modifier: " + coreItem.getEffectModifier())
+                        .setStyle(Style.EMPTY.setColor(Color.fromHex("#5555FF"))))
+        );
+
         if(nbt.contains("Inventory")) {
             IItemHandler stackHandler = getInventory(stack);
             for(int i = 0; i < stackHandler.getSlots(); i++) {
                 ItemStack itemStack = stackHandler.getStackInSlot(i);
                 if(!itemStack.isEmpty()) {
-                    tooltip.add(new TranslationTextComponent(itemStack.getTranslationKey()).setStyle(Style.EMPTY.setColor(Color.fromHex("#00AAAA"))));
+                    tooltip.add(new StringTextComponent(" ").append(
+                            new TranslationTextComponent(itemStack.getTranslationKey())
+                                    .setStyle(Style.EMPTY.setColor(Color.fromHex("#00AAAA")))
+                    ));
+
+                    if(itemStack.getItem() instanceof Infuseable) {
+                        ((Infuseable)itemStack.getItem()).addIndentedInformation(itemStack, worldIn, tooltip, flagIn);
+                    }
+                    /*
                     List<String> infusionStrings = ((Infuseable)itemStack.getItem()).getInfoStrings(itemStack);
                     for(int j = 0; j < infusionStrings.size(); j++) {
                         tooltip.add(new TranslationTextComponent(infusionStrings.get(j)).setStyle(Style.EMPTY.setColor(Color.fromHex("#FFAA00"))));
-                    }
+                    }*/
                 }
             }
         }

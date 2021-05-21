@@ -19,19 +19,19 @@ public class CrownModel extends ArmorBaseModel {
         //You can see 2 examples of how this may look, adding a cube to the head
         //and a rotated cube on the chest
         //Export the unedited armor template to see which parts you should **not** copy over
-        addBoxFromBlockBench(0, 0, 0, 8, 2, 2);
-        addBoxFromBlockBench(0, 0, 6, 8, 2, 2);
-        addBoxFromBlockBench(0, 0, 2, 2, 2, 4);
-        addBoxFromBlockBench(6, 0, 2, 2, 2, 4);
+        addBoxFromBlockBench(-1, -1, -1, 10, 2, 2);
+        addBoxFromBlockBench(-1, -1, 7, 10, 2, 2);
+        addBoxFromBlockBench(-1, -1, 1, 2, 2, 6);
+        addBoxFromBlockBench(7, -1, 1, 2, 2, 6);
 
-        addBoxFromBlockBench(0,2,0,2,2,2);
-        addBoxFromBlockBench(6,2,0,2,2,2);
-        addBoxFromBlockBench(6,2,6,2,2,2);
-        addBoxFromBlockBench(0,2,6,2,2,2);
-        addBoxFromBlockBench(0,2,3,2,2,2);
-        addBoxFromBlockBench(6,2,3,2,2,2);
-        addBoxFromBlockBench(3,2,0,2,2,2);
-        addBoxFromBlockBench(3,2,6,2,2,2);
+        addBoxFromBlockBench(-1,1,-1,2,2,2);
+        addBoxFromBlockBench(7,1,-1,2,2,2);
+        addBoxFromBlockBench(7,1,7,2,2,2);
+        addBoxFromBlockBench(-1,1,7,2,2,2);
+        addBoxFromBlockBench(-1,1,3,2,2,2);
+        addBoxFromBlockBench(7,1,3,2,2,2);
+        addBoxFromBlockBench(3,1,-1,2,2,2);
+        addBoxFromBlockBench(3,1,7,2,2,2);
     }
 
     private void addBoxFromBlockBench(float x, float y, float z, float width, float height, float depth) {
