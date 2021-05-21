@@ -54,7 +54,8 @@ public class InfusionEffects {
                 player.addPotionEffect(new EffectInstance(Effects.HASTE, 200, (int)(1+effectModifier)));
                 break;
             case "item.minecraft.ender_eye":
-                getAllNearbyEntities(player).forEach((LivingEntity entity) -> {entity.setMotion(entity.getPositionVec().subtractReverse(player.getPositionVec()).add(0, 3, 0).normalize().mul(2.0f * effectModifier,2.0f * effectModifier,2.0f * effectModifier));});
+                getAllNearbyEntities(player).forEach((LivingEntity entity) -> {entity.setMotion(entity.getPositionVec().subtractReverse(player.getPositionVec()).add(0, 3, 0).mul(0.2f * effectModifier,0.2f * effectModifier,0.2f * effectModifier));});
+                break;
             default:
                 TrinketeeringMod.LOGGER.debug("no infusion effect found for " + translationKey);
                 break;
