@@ -26,7 +26,7 @@ public abstract class Infuseable extends Item {
         super(new Item.Properties().group(ModItemGroup.TRINKETS).maxStackSize(1));
     }
     private ItemStackHandler createInfusionHandler() {
-        return new ItemStackHandler(4) {
+        return new ItemStackHandler(1) {
             @Override
             protected void onContentsChanged(int slot) {
                 //markDirty();

@@ -26,7 +26,7 @@ public class InfusionTableContainer extends Container {
     private IItemHandler playerInventory;
     private IItemHandler infusionSlots = createHandler();
     private ItemStackHandler createHandler() {
-        return new ItemStackHandler(5) {
+        return new ItemStackHandler(2) {
             @Override
             protected void onContentsChanged(int slot) {
                 //markDirty();
@@ -68,10 +68,10 @@ public class InfusionTableContainer extends Container {
         this.playerInventory = new InvWrapper(playerInventory);
         this.worldPosCallable = IWorldPosCallable.of(world, pos);
 
-        InfusionTableSlot slot = (InfusionTableSlot) this.addSlot(new InfusionTableSlot(infusionSlots, 0, 35, 35, this));
+        InfusionTableSlot slot = (InfusionTableSlot) this.addSlot(new InfusionTableSlot(infusionSlots, 0, 26, 15, this));
         NonNullList<Slot> childSlots = NonNullList.create();
-        for(int i = 1; i < 5; i++) {
-            childSlots.add(this.addSlot(new InfusionTableChildSlot(infusionSlots, i, 53 + 18 * i, 35)));
+        for(int i = 1; i < 2; i++) {
+            childSlots.add(this.addSlot(new InfusionTableChildSlot(infusionSlots, i, 8 + 18 * i, 54)));
         }
         layoutPlayerInventorySlots(8, 84);
     }

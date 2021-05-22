@@ -24,7 +24,7 @@ public class TrinketTableScreen extends ContainerScreen<TrinketTableContainer> {
 
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
-        drawString(matrixStack, minecraft.getInstance().fontRenderer, "Trinket Table", 10, 5, 0xffffff);
+        //drawString(matrixStack, minecraft.getInstance().fontRenderer, "Trinket Table", 10, 5, 0xffffff);
     }
 
     @Override

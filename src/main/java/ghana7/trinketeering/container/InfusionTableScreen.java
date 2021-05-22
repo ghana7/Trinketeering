@@ -24,7 +24,7 @@ public class InfusionTableScreen extends ContainerScreen<InfusionTableContainer>
 
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
-        drawString(matrixStack, minecraft.getInstance().fontRenderer, "Infusion Table", 10, 5, 0xffffff);
+        //drawString(matrixStack, minecraft.getInstance().fontRenderer, "Infusion Table", 10, 5, 0xffffff);
     }
 
     @Override

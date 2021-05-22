@@ -71,10 +71,13 @@ public class TrinketTableContainer extends Container {
         this.playerInventory = new InvWrapper(playerInventory);
         this.worldPosCallable = IWorldPosCallable.of(world, pos);
 
-        TrinketTableSlot slot = (TrinketTableSlot) this.addSlot(new TrinketTableSlot(infuseableSlots, 0, 35, 35, this));
+        TrinketTableSlot slot = (TrinketTableSlot) this.addSlot(new TrinketTableSlot(infuseableSlots, 0, 27, 7, this));
         NonNullList<Slot> childSlots = NonNullList.create();
-        for(int i = 1; i < 5; i++) {
-            childSlots.add(this.addSlot(new TrinketTableChildSlot(infuseableSlots, i, 53 + 18 * i, 35)));
+        for(int i = 1; i < 3; i++) {
+            childSlots.add(this.addSlot(new TrinketTableChildSlot(infuseableSlots, i,  18 * i, 42)));
+        }
+        for(int i = 3; i < 5; i++) {
+            childSlots.add(this.addSlot(new TrinketTableChildSlot(infuseableSlots, i, 18 - 54 + 18 * i, 60)));
         }
         layoutPlayerInventorySlots(8, 84);
     }
