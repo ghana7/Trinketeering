@@ -198,6 +198,4 @@ public abstract class Infuseable extends Item {
             }
         }
     }
-
-
 }
