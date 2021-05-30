@@ -79,7 +79,7 @@ public class TrinketTableContainer extends Container {
         for(int i = 3; i < 5; i++) {
             childSlots.add(this.addSlot(new TrinketTableChildSlot(infuseableSlots, i, 18 - 54 + 18 * i, 60)));
         }
-        layoutPlayerInventorySlots(8, 84);
+        layoutPlayerInventorySlots(36, 84);
     }
 
     public void sendUpdatePacket(int slot, ItemStack itemStack){

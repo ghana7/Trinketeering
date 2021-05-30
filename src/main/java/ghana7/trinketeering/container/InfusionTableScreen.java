@@ -19,6 +19,8 @@ public class InfusionTableScreen extends ContainerScreen<InfusionTableContainer>
 
     public InfusionTableScreen(InfusionTableContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
+        this.xSize = 237;
+        this.ySize = 166;
     }
 
     @Override

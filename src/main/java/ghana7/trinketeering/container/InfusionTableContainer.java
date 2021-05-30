@@ -73,7 +73,7 @@ public class InfusionTableContainer extends Container {
         for(int i = 1; i < 2; i++) {
             childSlots.add(this.addSlot(new InfusionTableChildSlot(infusionSlots, i, 8 + 18 * i, 54)));
         }
-        layoutPlayerInventorySlots(8, 84);
+        layoutPlayerInventorySlots(36, 84);
     }
     public void sendUpdatePacket(int slot, ItemStack itemStack){
         ((ServerPlayerEntity)playerEntity).connection.sendPacket(new SSetSlotPacket(windowId, slot, itemStack));

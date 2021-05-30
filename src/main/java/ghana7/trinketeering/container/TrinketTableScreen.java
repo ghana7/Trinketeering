@@ -20,6 +20,8 @@ public class TrinketTableScreen extends ContainerScreen<TrinketTableContainer> {
 
     public TrinketTableScreen(TrinketTableContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
+        this.xSize = 237;
+        this.ySize = 166;
     }
 
     @Override
