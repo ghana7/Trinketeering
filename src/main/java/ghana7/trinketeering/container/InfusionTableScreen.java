@@ -38,9 +38,12 @@ public class InfusionTableScreen extends ContainerScreen<InfusionTableContainer>
         }
         ItemStack stack = getContainer().getSlot(0).getStack();
         ((Infuseable)stack.getItem()).addIndentedInformation(stack, null, dummyTooltip, ITooltipFlag.TooltipFlags.ADVANCED);
+        matrixStack.push();
+        matrixStack.scale(0.5f,0.5f,0.5f);
         for(int i = 0; i < dummyTooltip.size(); i++) {
-            drawString(matrixStack, minecraft.getInstance().fontRenderer, dummyTooltip.get(i), 70, 7 + 12 * i, 0xffffff);
+            drawString(matrixStack, minecraft.getInstance().fontRenderer, dummyTooltip.get(i), 70 * 2, (7 + 6 * i) * 2, 0xffffff);
         }
+        matrixStack.pop();
     }
 
     @Override
